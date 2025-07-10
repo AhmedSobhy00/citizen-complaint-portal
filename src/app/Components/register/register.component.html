@@ -1,0 +1,33 @@
+<div class="max-w-xl mx-auto p-6 bg-white shadow rounded-xl space-y-4">
+  <h2 class="text-2xl font-bold text-gray-800">Citizen Registration</h2>
+
+  <div class="grid grid-cols-2 gap-4">
+    <input type="text" [(ngModel)]="model.firstname" placeholder="First Name" class="input" />
+    <input type="text" [(ngModel)]="model.lastname" placeholder="Last Name" class="input" />
+    <input type="text" [(ngModel)]="model.phone" placeholder="Phone" class="input" />
+    <input type="email" [(ngModel)]="model.email" placeholder="Email" class="input" />
+    <input type="text" [(ngModel)]="model.username" placeholder="Username" class="input" />
+    <input type="password" [(ngModel)]="model.password" placeholder="Password" class="input" />
+    <input type="number" [(ngModel)]="model.government" placeholder="Governorate" class="input" />
+    <input type="text" [(ngModel)]="model.address" placeholder="Address" class="input" />
+    <input type="text" [(ngModel)]="model.nationalId" placeholder="National ID" class="input col-span-2" />
+  </div>
+
+  <button (click)="onRegister()" class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700">
+    Register
+  </button>
+
+  <div *ngIf="message" class="text-green-600 font-semibold mt-2">
+    {{ message }}
+  </div>
+  <div *ngIf="error" class="text-red-600 font-semibold mt-2">
+    {{ error }}
+  </div>
+</div>
+
+<!-- Tailwind Utility Class -->
+<style>
+  .input {
+    @apply p-2 border rounded w-full;
+  }
+</style>

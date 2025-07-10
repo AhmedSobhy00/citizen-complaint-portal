@@ -1,0 +1,20 @@
+<div class="overflow-x-auto mt-6">
+  <table class="min-w-full border text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="bg-gray-100 dark:bg-gray-700 text-xs uppercase text-gray-700 dark:text-gray-400">
+      <tr>
+        <th class="px-4 py-2">Title</th>
+        <th class="px-4 py-2">Ticket #</th>
+        <th class="px-4 py-2">Description</th>
+        <th class="px-4 py-2">Customer ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of complaints">
+        <td class="px-4 py-2">{{ c.title }}</td>
+        <td class="px-4 py-2">{{ c.ticketnumber }}</td>
+        <td class="px-4 py-2">{{ c.description }}</td>
+        <td class="px-4 py-2">{{ c.customerId }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
