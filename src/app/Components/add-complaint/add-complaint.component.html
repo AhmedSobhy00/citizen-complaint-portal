@@ -1,0 +1,110 @@
+<div class="max-w-xl mx-auto pb-6 md:px-6 bg-white rounded-lg">
+  <div
+    *ngIf="submitted; else complaintForm"
+    class="bg-green-50 p-6 rounded-lg text-center border border-green-300 shadow"
+  >
+    <h3 class="text-xl font-semibold text-green-800 mb-2">
+      Complaint Submitted Successfully!
+    </h3>
+    <p class="text-green-700 mb-4">Your ticket number is:</p>
+
+    <div class="flex items-center justify-center gap-2">
+      <span
+        class="font-mono bg-white px-4 py-2 rounded border text-green-800"
+        >{{ ticketNumber }}</span
+      >
+      <button
+        (click)="copyTicket()"
+        class="bg-black text-white px-4 py-2 rounded hover:bg-gray-700"
+      >
+        <i class="fas fa-copy mr-1"></i> Copy
+      </button>
+    </div>
+
+    <p class="mt-4 text-sm text-gray-600">
+      Please save this number to track or search your complaint later.
+    </p>
+  </div>
+  <ng-template #complaintForm>
+      <h2 class="text-xl font-outfit font-semibold mb-4">Submit a Complaint</h2>
+        <div *ngIf="error" class="mb-4 text-red-600  text-sm">
+      {{ error }}
+    </div>
+    <form class="space-y-4">
+      <input
+        type="text"
+        class="w-full border p-2 rounded"
+        [(ngModel)]="model.title"
+        name="title"
+        placeholder="Title"
+        required
+      />
+      <textarea
+        class="w-full border p-2 rounded"
+        [(ngModel)]="model.description"
+        name="description"
+        placeholder="Description"
+        required
+      ></textarea>
+
+      <select
+        [(ngModel)]="model.source"
+        name="source"
+        class="w-full border p-2 rounded"
+        required
+      >
+        <option value='' disabled selected>Select Source</option>
+        <option *ngFor="let s of sources; index as i" [value]="i">
+          {{ s }}
+        </option>
+      </select>
+
+      <select
+        [(ngModel)]="model.complaintType"
+        name="complaintType"
+        class="w-full border p-2 rounded"
+        required
+      >
+        <option value="" disabled selected>Select Complaint Type</option>
+        <option *ngFor="let c of complaintTypes; index as i" [value]="i">
+          {{ c }}
+        </option>
+      </select>
+
+      <select
+        [(ngModel)]="model.government"
+        name="government"
+        class="w-full border p-2 rounded"
+        required
+      >
+        <option value="" disabled selected>Select Government</option>
+        <option *ngFor="let g of governorates; index as i" [value]="i">
+          {{ g }}
+        </option>
+      </select>
+
+      <select
+        [(ngModel)]="model.sector"
+        name="sector"
+        class="w-full border p-2 rounded"
+        required
+      >
+        <option value="" disabled selected>Select Sector</option>
+        <option *ngFor="let s of sectors; index as i" [value]="i">
+          {{ s }}
+        </option>
+      </select>
+
+      <button
+        (click)="onSubmit()"
+        [disabled]="isSubmitting"
+        class="w-full bg-black text-white p-2 font-outfit rounded hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <span *ngIf="!isSubmitting">Submit</span>
+        <span *ngIf="isSubmitting">
+          <i class="fas fa-spinner fa-spin mr-2"></i> Submitting...
+        </span>
+      </button>
+    </form></ng-template
+  >
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-landing',
@@ -7,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './landing.component.css'
 })
 export class LandingComponent {
+  @Output() trackPressed = new EventEmitter<void>();
+  @Output() addPressed = new EventEmitter<void>();
+
+      
+
+  onTrackClick() {
+    this.trackPressed.emit();
+  }
+  onaAddClick() {
+    this.addPressed.emit();
+  }
 
 }

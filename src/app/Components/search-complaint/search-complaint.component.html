@@ -1,0 +1,91 @@
+<div class="max-w-xl mx-auto pb-6 px-6 bg-white rounded">
+  <div *ngIf="!result">
+    <h2 class="text-xl font-outfit font-semibold mb-2">Search a complaints</h2>
+    <p class="text-sm text-gray-600 mb-4">
+      Note: You must be a registered user to track your complaints.
+    </p>
+
+    <div *ngIf="error" class="text-red-600 mb-3 text-sm font-semibold">
+      {{ error }}
+    </div>
+
+    <form (ngSubmit)="onSearch()" class="space-y-4">
+      <input
+        type="text"
+        class="w-full border p-2 rounded"
+        [(ngModel)]="caseNumber"
+        name="caseNumber"
+        placeholder="Case Number"
+        required
+      />
+
+      <input
+        type="email"
+        class="w-full border p-2 rounded"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        class="w-full bg-black text-white p-2 rounded hover:bg-gray-700 flex items-center justify-center gap-2"
+      >
+        <span *ngIf="!isLoading">Search</span>
+        <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+      </button>
+    </form>
+  </div>
+<div *ngIf="complaint" class="pb-6 px-6 bg-white rounded-lg overflow-hidden">
+  <h3 class="text-xl mb-6 font-outfit font-semibold text-black">
+    Complaint Details
+  </h3>
+
+  <div class="border-t pt-6 border-gray-200">
+    <div class="flex flex-wrap gap-y-6 -mx-3">
+      <div class="w-full md:w-1/2 px-3">
+        <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Title</label>
+        <p class="mt-1 text-sm text-gray-900 font-medium">
+          {{ complaint.title }}
+        </p>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3">
+        <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Ticket Number</label>
+        <p class="mt-1 text-sm text-gray-900 font-mono bg-gray-50 px-2 py-1 rounded inline-block">
+          {{ complaint.ticketnumber }}
+        </p>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3">
+        <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Sector</label>
+        <p class="mt-1 text-sm text-gray-900">{{ complaint.sector }}</p>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3">
+        <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Status Reason</label>
+        <p class="mt-1 text-sm text-gray-900">{{ complaint.statusReason }}</p>
+      </div>
+    </div>
+
+    <div class="mt-6 pt-6 border-t border-gray-200">
+      <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Description</label>
+      <p class="mt-2 text-sm text-gray-900 leading-relaxed">
+        {{ complaint.description }}
+      </p>
+    </div>
+  </div>
+
+  <button
+    (click)="searchAgain()"
+    type="submit"
+    class="w-full bg-black text-white mt-6 p-2 font-outfit rounded hover:bg-gray-700"
+  >
+    Search another complaint
+  </button>
+</div>
+
+
+</div>

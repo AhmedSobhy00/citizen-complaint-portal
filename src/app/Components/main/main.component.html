@@ -1,0 +1,131 @@
+<div 
+  class="mx-auto flex-column h-screen bg-gradient-to-b from-white to-[rgba(167,207,219,1)]"
+>
+  <app-header-out
+    (loginClicked)="openLogin()"
+    (registerClicked)="openRegister()"
+    *ngIf="!isLoggedIn()"
+    class="h-[20%] px-24 flex md:flex-row justify-center items-center flex-col md:justify-between md:gap-0 gap-4 w-screen"
+  ></app-header-out>
+  <app-header-in
+    *ngIf="isLoggedIn()"
+    class="h-[20%] px-24 flex md:flex-row justify-center items-center flex-col md:justify-between md:gap-0 gap-4 w-screen"
+  ></app-header-in>
+  <div
+    *ngIf="loginPressed"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-[400px] flex flex-col gap-2"
+    >
+      <div class="flex justify-end text-2xl items-center">
+        <button (click)="close()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      <app-login (loginClicked)="close()"></app-login>
+    </div>
+  </div>
+  <div
+    *ngIf="RegisterPressed"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-2"
+    >
+      <div class="flex justify-end text-2xl items-center">
+        <button (click)="close()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      <app-register (registerClicked)="closeRegister()"></app-register>
+    </div>
+  </div>
+  <div
+    *ngIf="trackPressed"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-2"
+    >
+      <div class="flex justify-end text-2xl items-center">
+        <button (click)="close()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      <app-search-complaint></app-search-complaint>
+    </div>
+  </div>
+  <div
+  *ngIf="addPressed"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div
+    class="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-2"
+  >
+    <div class="flex justify-end text-2xl items-center">
+      <button (click)="close()">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+    </div>
+
+    <div class=" bg-white pb-6 px-6 rounded-lg space-y-4">
+      <h2 class="text-xl font-semibold font-outfit text-black">
+        Enter Your Email
+      </h2>
+      
+      <form (ngSubmit)="onContinue()" class="space-y-4" #emailForm="ngForm">
+        
+                <div
+                  *ngIf="emailInput.invalid && emailInput.touched"
+                  class="text-red-500 text-sm"
+                >
+                  Please enter a valid email.
+                </div>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          #emailInput="ngModel"
+          required
+          email
+          placeholder="Type your email"
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <button
+          type="submit"
+          [disabled]="emailForm.invalid"
+          class="w-full bg-black text-white p-2 rounded hover:bg-gray-700 font-outfit disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Continue
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <div
+    *ngIf="emailEntered"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-2"
+    >
+      <div class="flex justify-end text-2xl items-center">
+        <button (click)="close()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      <app-add-complaint></app-add-complaint>
+    </div>
+  </div>
+  <div class="h-[80%] w-screen">
+    <app-landing
+      *ngIf="!isLoggedIn()"
+      (trackPressed)="openSearch()"
+      (addPressed)="openAddComplaint()"
+    ></app-landing>
+    <app-profile *ngIf="isLoggedIn()"></app-profile>
+  </div>
+</div>

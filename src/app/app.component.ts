@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from "./Components/login/login.component";
-import { RegisterComponent } from "./Components/register/register.component";
-import { ProfileComponent } from "./Components/profile/profile.component";
+import { TokenService } from './Services/token.service';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [ LoginComponent, RegisterComponent, ProfileComponent],
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent {
-  title = 'CitizenComplaint';
-}
+export class AppComponent {}

@@ -1,1 +1,30 @@
-<p>landing works!</p>
+<div
+  class="flex items-center justify-center h-[15%]"
+>
+  <p class="font-outfit md:text-4xl text-3xl font-bold">
+    Your
+    <span
+      class="bg-gradient-to-r from-[#5C6C71] to-[#A7CFDB] bg-clip-text text-transparent"
+      >voice</span
+    >
+    matters.
+  </p>
+</div>
+<div
+  class="h-[85%] pb-20 flex-col items-center flex justify-center gap-10"
+>
+    <button (click)="onaAddClick()"
+      class="md:w-[350px] md:h-[60px] w-[300px] h-[55px] rounded-[33px] font-outfit font-medium md:text-xl text-lg text-white bg-black flex items-center justify-between md:px-8 px-5"
+    >
+      <i class="fa-solid fa-plus"></i>
+      <span>Add an urgent complaint</span>
+      <span class="w-4"></span> 
+    </button>
+    <button (click)="onTrackClick()"
+      class="md:w-[350px] md:h-[60px] w-[300px] h-[55px] rounded-[33px] font-outfit font-semibold md:text-xl text-lg border-[3px] border-black text-black flex items-center justify-between md:px-8 px-5"
+    >
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Track your complaint</span>
+      <span class="w-4"></span> 
+    </button>
+</div>

@@ -1,20 +1,88 @@
-<div class="overflow-x-auto mt-6">
-  <table class="min-w-full border text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="bg-gray-100 dark:bg-gray-700 text-xs uppercase text-gray-700 dark:text-gray-400">
-      <tr>
-        <th class="px-4 py-2">Title</th>
-        <th class="px-4 py-2">Ticket #</th>
-        <th class="px-4 py-2">Description</th>
-        <th class="px-4 py-2">Customer ID</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of complaints">
-        <td class="px-4 py-2">{{ c.title }}</td>
-        <td class="px-4 py-2">{{ c.ticketnumber }}</td>
-        <td class="px-4 py-2">{{ c.description }}</td>
-        <td class="px-4 py-2">{{ c.customerId }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div
+  class="flex flex-col items-center justify-around md:px-24 h-[25%]"
+>
+  <p class="font-outfit md:text-4xl text-2xl font-bold">
+    Good
+    <span
+      class="bg-gradient-to-r from-[#5C6C71] to-[#A7CFDB] bg-clip-text text-transparent"
+      >{{ getGreeting() }} </span
+    >{{ firstName }}.
+  </p>
+  <button (click)="openAddComplaint()"
+    class="md:w-[250px] md:h-[50px] w-[220px] h-[45px] rounded-[33px] font-outfit font-medium md:text-xl text-lg text-white bg-black flex items-center justify-between px-5 md:px-6"
+  >
+    <i class="fa-solid fa-plus"></i>
+    <span>new complaint</span>
+    <span class="w-4"></span>
+  </button>
 </div>
+<div class="h-[75%] flex-col  pb-5 flex gap-3">
+  <p class="font-outfit md:text-2xl text-xl font-bold md:px-24 px-5">My complaints</p>
+  <div *ngIf="isLoading" class="text-center py-10">
+    <i class="fa-solid fa-spinner fa-spin text-4xl text-gray-500"></i>
+    <p class="font-outfit text-lg text-gray-500 mt-2">Loading complaints...</p>
+  </div>
+  <div *ngIf="!isLoading" class="overflow-x-auto px-5 md:px-24">
+    <div *ngIf="complaints.length == 0" class="text-center">
+      <div class="bg-white border-2 border-black rounded-lg py-24">
+        <i class="fa-solid fa-inbox text-6xl text-gray-400 mb-4"></i>
+        <h3 class="font-outfit text-xl md:text-2xl font-bold text-black mb-2">
+          No Complaints Yet
+        </h3>
+        <p class="font-outfit text-gray-600">
+          You don't have any complaints at the moment.
+        </p>
+      </div>
+    </div>
+    <div
+      *ngIf="complaints.length > 0"
+      class="max-h-full overflow-auto border border-black"
+    >
+      <table class="min-w-full bg-gray-200 font-outfit">
+        <thead class="sticky top-0 bg-gray-300 md:text-xl text-black">
+          <tr>
+            <th class="px-6 py-4 text-left font-semibold">Title</th>
+            <th class="px-6 py-4 text-left font-semibold">Description</th>
+            <th class="px-6 py-4 text-left font-semibold">Sector</th>
+            <th class="px-6 py-4 text-left font-semibold">Status</th>
+            <th class="px-6 py-4 text-left font-semibold">Ticket number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let c of complaints; let i = index"
+            [class]="i % 2 === 0 ? 'bg-white' : 'bg-gray-50'"
+            class="border-b-2 border-black hover:bg-gray-100 transition-colors"
+          >
+          <td class="px-6 py-4 border-r border-gray-300 font-medium">
+            {{ c.title }}
+          </td>
+          <td class="px-6 py-4 border-r border-gray-300">
+            {{ c.description }}
+          </td>
+          <td class="px-6 py-4 border-r border-gray-300">{{ c.sector }}</td>
+          <td class="px-6 py-4 border-r border-gray-300">{{ c.statusReason }}</td>
+            <td class="px-6 py-4 border-r border-gray-300">
+              {{ c.ticketnumber }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  <div
+    *ngIf="addPressed"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-2"
+    >
+      <div class="flex justify-end text-2xl items-center">
+        <button (click)="close()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      <app-add-complaint></app-add-complaint>
+    </div>
+  </div>
